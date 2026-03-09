@@ -1,0 +1,17 @@
+PowerShell Execution Detection
+
+index=main EventCode=1 Image="*powershell.exe"
+
+
+Brute Force Detection
+
+index=main EventCode=4625
+| stats count by Account_Name, host
+| where count > 3
+
+
+Multiple Process Spawn
+
+index=main EventCode=1
+| stats count by ParentImage
+| where count > 10
